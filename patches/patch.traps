@@ -1,0 +1,11 @@
+--- src/apps/snmp/snmp_traps.c	2025-02-01 18:11:47.985226277 -0800
++++ /home/rrose/src/bos/build.x/external-lwip-prefix/src/external-lwip/src/apps/snmp/snmp_traps.c	2025-02-01 17:51:36.769231609 -0800
+@@ -353,7 +353,7 @@
+   u32_t timestamp = 0;
+   struct snmp_varbind *original_varbinds = varbinds;
+   struct snmp_varbind *original_prev = NULL;
+-  struct snmp_varbind snmp_v2_special_varbinds[] = {
++  static struct snmp_varbind snmp_v2_special_varbinds[] = {
+                                                      /* First varbind is used to store sysUpTime */
+                                                      {
+                                                        NULL,                            /* *next */

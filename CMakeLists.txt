@@ -25,12 +25,17 @@ if(WITH_LWIP)
   ExternalProject_Add(external-lwip
     URL https://download.savannah.nongnu.org/releases/lwip/lwip-2.2.0.zip
     UPDATE_COMMAND ""
+    PATCH_COMMAND patch -p0 < ../../../../patches/patch.traps &&
+                  patch -p0 < ../../../../patches/patch.main &&
+		  cd contrib/examples/example_app && ln -s ../../../src/include/lwip/opt.h lwipcfg.h
+		  # cd contrib/examples/example_app && ln -s test_configs/opt_default.h lwipcfg.h
     CMAKE_ARGS
       -DCMAKE_INSTALL_PREFIX:PATH=${PROJECT_BINARY_DIR}/third_party/lwip
       -DCMAKE_TOOLCHAIN_FILE:PATH=${TOOLCHAIN_FILE}
       -DCMAKE_BUILD_TYPE:STRING=Debug
       -DENABLE_TESTING:BOOL=OFF
       -DENABLE_PROGRAMS:BOOL=OFF
+    INSTALL_COMMAND ""
     TEST_COMMAND ""
     )
     set(LWIP_PREFIX ${PROJECT_BINARY_DIR}/third_party/mbedtls PARENT_SCOPE)
