@@ -38,7 +38,7 @@ if(WITH_LWIP)
     INSTALL_COMMAND ""
     TEST_COMMAND ""
     )
-    set(LWIP_PREFIX ${PROJECT_BINARY_DIR}/third_party/mbedtls PARENT_SCOPE)
+    set(LWIP_PREFIX ${PROJECT_BINARY_DIR}/third_party/lwip PARENT_SCOPE)
 endif(WITH_LWIP)
 
 option(WITH_MBEDTLS "Build with mbedtls" ON)
