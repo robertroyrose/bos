@@ -19,6 +19,24 @@ if(BUILD_TESTING)
 	add_subdirectory(tests)
 endif()
 
+option(WITH_NANOPB "Build with nanopb" ON)
+if(WITH_NANOPB)
+  include(ExternalProject)
+  ExternalProject_Add(external-nanopb
+    URL https://github.com/nanopb/nanopb/archive/refs/tags/nanopb-0.4.9.zip
+    UPDATE_COMMAND ""
+    CMAKE_ARGS
+      -DCMAKE_INSTALL_PREFIX:PATH=${PROJECT_BINARY_DIR}/third_party/nanopb
+      -DCMAKE_TOOLCHAIN_FILE:PATH=${TOOLCHAIN_FILE}
+      -DCMAKE_BUILD_TYPE:STRING=Debug
+      -DENABLE_TESTING:BOOL=OFF
+      -DENABLE_PROGRAMS:BOOL=OFF
+    INSTALL_COMMAND ""
+    TEST_COMMAND ""
+    )
+    set(NANOPB ${PROJECT_BINARY_DIR}/third_party/lwip PARENT_SCOPE)
+endif(WITH_NANOPB)
+
 option(WITH_LWIP "Build with lwip" ON)
 if(WITH_LWIP)
   include(ExternalProject)
